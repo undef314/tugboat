@@ -1,0 +1,25 @@
+name: tugboat
+version: 0.2.0
+summary: CL tool for interacting with DigitalOcean droplets.
+description: |
+  A command line tool for interacting with your 
+  DigitalOcean droplets.
+
+
+grade: devel
+confinement: devmode
+
+apps:
+  tugboat:
+    environment:
+      GEM_HOME: $SNAP/gems
+      GEM_PATH: $SNAP 
+    command: bin/tugboat
+    plugs: [home]
+
+parts:
+  tugboat:
+    plugin: ruby
+    build-packages: [gcc, make, ruby-dev]
+    gems: ['tugboat']
+    source-tag: 0.2.0
