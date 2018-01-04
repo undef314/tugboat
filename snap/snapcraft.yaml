@@ -11,15 +11,19 @@ confinement: devmode
 
 apps:
   tugboat:
+    command: usr/bin/ruby $SNAP/bin/tugboat
     environment:
+      RUBYLIB: '$SNAP/usr/local/lib/site_ruby/2.3.0:$SNAP/usr/local/lib/x86_64-linux-gnu/site_ruby:$SNAP/usr/local/lib/site_ruby:$SNAP/usr/lib/ruby/vendor_ruby/2.3.0:$SNAP/usr/lib/x86_64-linux-gnu/ruby/vendor_ruby/2.3.0:$SNAP/usr/lib/ruby/vendor_ruby:$SNAP/usr/lib/ruby/2.3.0:$SNAP/usr/lib/x86_64-linux-gnu/ruby/2.3.0'     
       GEM_HOME: $SNAP/gems
       GEM_PATH: $SNAP 
-    command: bin/tugboat
-    plugs: [home]
 
 parts:
   tugboat:
-    plugin: ruby
-    build-packages: [gcc, make, ruby-dev]
-    gems: ['tugboat']
-    source-tag: 0.2.0
+    source: https://github.com/petems/tugboat.git
+    plugin: nil
+    build: gem build tugboat.gemspec
+    install: gem install tugboat-*.gem -i $SNAPCRAFT_PART_INSTALL
+    build-packages: [gcc, make, libc6-dev, ruby-dev]
+    stage-packages: [ruby]
+    source-tag: v0.2.0
+
