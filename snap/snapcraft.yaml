@@ -1,5 +1,5 @@
 name: tugboat
-version: 0.2.0
+version: v0.2.0
 summary: CL tool for interacting with DigitalOcean droplets.
 description: |
   A command line tool for interacting with your 
